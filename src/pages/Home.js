@@ -7,16 +7,9 @@ export default function Home() {
     const [searchParams] = useSearchParams();
 
     useEffect(() => {
-        console.log('API URL:', process.env.REACT_APP_API_URL);
         fetch(process.env.REACT_APP_API_URL+'/products?'+searchParams)
-        .then(res => {
-            console.log('Response:', res);
-            return res.json();
-        })
-        .then(res => {
-            console.log('Data:', res);
-            setProducts(res.products);
-        })
+        .then(res => res.json())
+        .then(res => setProducts(res.products))
         .catch(err => console.log('Error:', err));
     },[searchParams])
     return <Fragment>
